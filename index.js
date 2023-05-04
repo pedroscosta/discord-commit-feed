@@ -11,8 +11,6 @@ app.use(express.json());
 
 app.post('/webhook', async (req, res) => {
     const { commits, sender, repository, ref } = req.body;
-
-    console.log(req.body);
     
     const signature = req.get('X-Hub-Signature');
     const computedSignature = `sha1=${crypto.createHmac('sha1', webhookSecret).update(JSON.stringify(req.body)).digest('hex')}`;
