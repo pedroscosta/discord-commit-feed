@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
+const { Console } = require('console');
 
 const app = express();
 
@@ -9,7 +10,7 @@ const webhookSecret = process.env.GITHUB_SECRET;
 app.use(express.json());
 
 app.post('/webhook', async (req, res) => {
-    const { commits, sender, repository, ref, branches_url } = req.body;
+    const { commits, sender, repository, ref } = req.body;
 
     console.log(req.body);
     
@@ -31,7 +32,7 @@ app.post('/webhook', async (req, res) => {
             content += ` • [${commit.id.substring(0, 7)}](${commit.url}): ${commit.message}\n`
     });
 
-    content += `- [${sender.login}](${sender.url}) on [${repository.name}](${repository.url})/[${branch}](${branches_url.replace('{/branch}', `/${branch}`)})`
+    content += `- [${sender.login}](${sender.url}) on [${repository.name}](${repository.url})/[${branch}](${repository.branches_url.replace('{/branch}', `/${branch}`)})`
 
     const message = {
             embeds: [],
