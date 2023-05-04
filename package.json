@@ -1,0 +1,8 @@
+{
+  "name": "discord-commit-feed",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/pedroscosta/discord-commit-feed.git",
+  "author": "Pedro Costa <scosta.pedro.manoel@gmail.com>",
+  "license": "MIT"
+}
