@@ -1,7 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
-const { Console } = require('console');
+
+const truncateString = (str, num) => str.length > num ? str.slice(0, num) + "..." : str;
 
 const app = express();
 
@@ -27,10 +28,10 @@ app.post('/webhook', async (req, res) => {
     let content = ''
 
     commits.forEach(commit => {
-            content += ` • [${commit.id.substring(0, 7)}](${commit.url}): ${commit.message}\n`
+            content += `[\`${commit.id.substring(0, 7)}\`](${commit.url}) ${truncateString(commit.message, 120)}\n`
     });
 
-    content += `- [${sender.login}](https://github.com/${sender.login}) on [${repository.name}](${repository.url})/[${branch}](https://github.com/${repository.full_name}/tree/${branch})`
+    content += `\n- [${sender.login}](https://github.com/${sender.login}) on [\`${repository.name}\`](${repository.url})\`/\`[\`${branch}\`](https://github.com/${repository.full_name}/tree/${branch})`
 
     const message = {
             embeds: [],
