@@ -28,10 +28,10 @@ app.post('/webhook', async (req, res) => {
     let content = ''
 
     commits.forEach(commit => {
-            content += `[\`${commit.id.substring(0, 7)}\`](${commit.url}) ${truncateString(commit.message, 120)}\n`
+            content += `[\`${commit.id.substring(0, 7)}\`](<${commit.url}>) ${truncateString(commit.message, 120)}\n`
     });
 
-    content += `\n- [${sender.login}](https://github.com/${sender.login}) on [\`${repository.name}\`](${repository.url})\`/\`[\`${branch}\`](https://github.com/${repository.full_name}/tree/${branch})`
+    content += `\n- [${sender.login}](<https://github.com/${sender.login}>) on [\`${repository.name}\`](<${repository.url}>)\`/\`[\`${branch}\`](<https://github.com/${repository.full_name}/tree/${branch}>)`
 
     const message = {
             embeds: [],
