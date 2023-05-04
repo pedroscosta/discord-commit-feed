@@ -24,7 +24,7 @@ app.post('/webhook', async (req, res) => {
     const branch_split = ref.split('/')
     const branch = branch_split[branch_split.length - 1]
 
-    let content = ""
+    let content = ''
 
     commits.forEach(commit => {
             content += ` • [${commit.id.substring(0, 7)}](${commit.url}): ${commit.message}\n`
@@ -40,7 +40,7 @@ app.post('/webhook', async (req, res) => {
             content
     }
 
-    await axios.post(webhookUrl, { content: message });
+    await axios.post(webhookUrl, message);
 
     res.sendStatus(200);
 });
